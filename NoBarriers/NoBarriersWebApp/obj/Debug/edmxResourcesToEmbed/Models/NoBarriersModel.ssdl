@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NoBarriersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NoBarriers.dbo.USERS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="FNAME" />
+      <PropertyRef Name="LNAME" />
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="BEGINDATE" />
+      <PropertyRef Name="EMAIL" />
+      <PropertyRef Name="CREATEDATE" />
+      <PropertyRef Name="CREATEDBY" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FNAME" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MNAME" Type="varchar" MaxLength="20" />
+    <Property Name="LNAME" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="FORMER" Type="varchar" MaxLength="20" />
+    <Property Name="UserID" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="BEGINDATE" Type="datetime" Nullable="false" />
+    <Property Name="ENDDATE" Type="datetime" />
+    <Property Name="SSN_Last4" Type="char" MaxLength="10" />
+    <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="UPDATEDATE" Type="datetime" />
+    <Property Name="CREATEDATE" Type="datetime" Nullable="false" />
+    <Property Name="CREATEDBY" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="NoBarriersModelStoreContainer">
+    <EntitySet Name="USERS" EntityType="Self.USERS" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [USERS].[ID] AS [ID], 
+    [USERS].[FNAME] AS [FNAME], 
+    [USERS].[MNAME] AS [MNAME], 
+    [USERS].[LNAME] AS [LNAME], 
+    [USERS].[FORMER] AS [FORMER], 
+    [USERS].[UserID] AS [UserID], 
+    [USERS].[BEGINDATE] AS [BEGINDATE], 
+    [USERS].[ENDDATE] AS [ENDDATE], 
+    [USERS].[SSN_Last4] AS [SSN_Last4], 
+    [USERS].[EMAIL] AS [EMAIL], 
+    [USERS].[UPDATEDATE] AS [UPDATEDATE], 
+    [USERS].[CREATEDATE] AS [CREATEDATE], 
+    [USERS].[CREATEDBY] AS [CREATEDBY]
+    FROM [dbo].[USERS] AS [USERS]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
