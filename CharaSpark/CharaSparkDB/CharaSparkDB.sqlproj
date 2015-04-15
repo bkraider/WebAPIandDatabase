@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{aa743b5a-dfd9-4b3e-b260-2b01e9e8d779}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql120DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureDatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -70,5 +70,8 @@
     <Build Include="Security\yIjkgMHAdqLogin_nobarrierswebsvcUser.sql" />
     <Build Include="Security\yIjkgMHAdqLogin_nobarrierswebsvc.sql" />
     <Build Include="Security\nobarrierswebsvc.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CharaSparkDB.PRODDBpublish.xml" />
   </ItemGroup>
 </Project>
