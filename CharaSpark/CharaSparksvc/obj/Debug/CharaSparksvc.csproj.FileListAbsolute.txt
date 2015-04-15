@@ -13,6 +13,5 @@ C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bi
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Net.Http.Formatting.xml
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Http.xml
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Http.WebHost.xml
-C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\obj\Debug\CharaSparksvc.csprojResolveAssemblyReference.cache
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\obj\Debug\CharaSparksvc.dll
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\obj\Debug\CharaSparksvc.pdb

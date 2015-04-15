@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="charasparkdevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="charasparkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="error_log">
           <Key>
             <PropertyRef Name="error_id" />
@@ -76,7 +76,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="charasparkdevModelStoreContainer">
+        <EntityContainer Name="charasparkModelStoreContainer">
           <EntitySet Name="error_log" EntityType="Self.error_log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wish_status" EntityType="Self.wish_status" Schema="dbo" store:Type="Tables" />
@@ -90,10 +90,11 @@
             <End Role="wishes" EntitySet="wishes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="charasparkdevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="charasparkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="error_log">
           <Key>
             <PropertyRef Name="error_id" />
@@ -120,12 +121,21 @@
           <Property Name="is_donor" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="wishes" Relationship="Self.FK_wishes_users" FromRole="users" ToRole="wishes" />
         </EntityType>
+        <EntityType Name="wish_status">
+          <Key>
+            <PropertyRef Name="wish_status_id" />
+          </Key>
+          <Property Name="wish_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="wish_status1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="wishes" Relationship="Self.FK_wishes_wish_status" FromRole="wish_status" ToRole="wishes" />
+        </EntityType>
         <EntityType Name="wish">
           <Key>
             <PropertyRef Name="wish_id" />
           </Key>
           <Property Name="wish_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="wish_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="wish_status_id" Type="Int32" />
           <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
@@ -134,8 +144,7 @@
           <Property Name="end_date" Type="DateTime" Precision="3" />
           <Property Name="userid" Type="Int32" />
           <NavigationProperty Name="user" Relationship="Self.FK_wishes_users" FromRole="wishes" ToRole="users" />
-          <Property Name="wish_status_id" Type="Int32" />
-          <NavigationProperty Name="wish_status" Relationship="charasparkdevModel.FK_wishes_wish_status" FromRole="wish" ToRole="wish_status" />
+          <NavigationProperty Name="wish_status" Relationship="Self.FK_wishes_wish_status" FromRole="wishes" ToRole="wish_status" />
         </EntityType>
         <Association Name="FK_wishes_users">
           <End Role="users" Type="Self.user" Multiplicity="0..1" />
@@ -149,48 +158,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="charasparkdevEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_wishes_wish_status">
+          <End Role="wish_status" Type="Self.wish_status" Multiplicity="0..1" />
+          <End Role="wishes" Type="Self.wish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="wish_status">
+              <PropertyRef Name="wish_status_id" />
+            </Principal>
+            <Dependent Role="wishes">
+              <PropertyRef Name="wish_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="charasparkEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="error_log" EntityType="Self.error_log" />
           <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="wish_status" EntityType="Self.wish_status" />
           <EntitySet Name="wishes" EntityType="Self.wish" />
           <AssociationSet Name="FK_wishes_users" Association="Self.FK_wishes_users">
             <End Role="users" EntitySet="users" />
             <End Role="wishes" EntitySet="wishes" />
           </AssociationSet>
-          <EntitySet Name="wish_status" EntityType="charasparkdevModel.wish_status" />
-          <AssociationSet Name="FK_wishes_wish_status" Association="charasparkdevModel.FK_wishes_wish_status">
+          <AssociationSet Name="FK_wishes_wish_status" Association="Self.FK_wishes_wish_status">
             <End Role="wish_status" EntitySet="wish_status" />
-            <End Role="wish" EntitySet="wishes" />
+            <End Role="wishes" EntitySet="wishes" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="wish_status">
-          <Key>
-            <PropertyRef Name="wish_status_id" />
-          </Key>
-          <Property Name="wish_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="wish_status1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="wishes" Relationship="charasparkdevModel.FK_wishes_wish_status" FromRole="wish_status" ToRole="wish" />
-        </EntityType>
-        <Association Name="FK_wishes_wish_status">
-          <End Type="charasparkdevModel.wish_status" Role="wish_status" Multiplicity="0..1" />
-          <End Type="charasparkdevModel.wish" Role="wish" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="wish_status">
-              <PropertyRef Name="wish_status_id" />
-            </Principal>
-            <Dependent Role="wish">
-              <PropertyRef Name="wish_status_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="charasparkdevModelStoreContainer" CdmEntityContainer="charasparkdevEntities">
+        <EntityContainerMapping StorageEntityContainer="charasparkModelStoreContainer" CdmEntityContainer="charasparkEntities">
           <EntitySetMapping Name="error_log">
-            <EntityTypeMapping TypeName="charasparkdevModel.error_log">
+            <EntityTypeMapping TypeName="charasparkModel.error_log">
               <MappingFragment StoreEntitySet="error_log">
                 <ScalarProperty Name="error_id" ColumnName="error_id" />
                 <ScalarProperty Name="error_desc" ColumnName="error_desc" />
@@ -199,7 +200,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="users">
-            <EntityTypeMapping TypeName="charasparkdevModel.user">
+            <EntityTypeMapping TypeName="charasparkModel.user">
               <MappingFragment StoreEntitySet="users">
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="first_name" ColumnName="first_name" />
@@ -216,12 +217,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="wishes">
-            <EntityTypeMapping TypeName="charasparkdevModel.wish">
-              <MappingFragment StoreEntitySet="wishes">
+          <EntitySetMapping Name="wish_status">
+            <EntityTypeMapping TypeName="charasparkModel.wish_status">
+              <MappingFragment StoreEntitySet="wish_status">
                 <ScalarProperty Name="wish_status_id" ColumnName="wish_status_id" />
+                <ScalarProperty Name="wish_status1" ColumnName="wish_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wishes">
+            <EntityTypeMapping TypeName="charasparkModel.wish">
+              <MappingFragment StoreEntitySet="wishes">
                 <ScalarProperty Name="wish_id" ColumnName="wish_id" />
                 <ScalarProperty Name="wish_name" ColumnName="wish_name" />
+                <ScalarProperty Name="wish_status_id" ColumnName="wish_status_id" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="created_by" ColumnName="created_by" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
@@ -229,14 +238,6 @@
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="wish_status">
-            <EntityTypeMapping TypeName="charasparkdevModel.wish_status">
-              <MappingFragment StoreEntitySet="wish_status">
-                <ScalarProperty Name="wish_status1" ColumnName="wish_status" />
-                <ScalarProperty Name="wish_status_id" ColumnName="wish_status_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

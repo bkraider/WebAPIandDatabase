@@ -14,7 +14,7 @@ namespace CharaSparksvc.Controllers
 {
     public class usersController : ApiController
     {
-        private charasparkdevEntities db = new charasparkdevEntities();
+        private charasparkEntities db = new charasparkEntities();
 
         // GET: api/users
         public IQueryable<user> Getusers()

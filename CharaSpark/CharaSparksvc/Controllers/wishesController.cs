@@ -14,7 +14,7 @@ namespace CharaSparksvc.Controllers
 {
     public class wishesController : ApiController
     {
-        private charasparkdevEntities db = new charasparkdevEntities();
+        private charasparkEntities db = new charasparkEntities();
 
         // GET: api/wishes
         public IQueryable<wish> Getwishes()

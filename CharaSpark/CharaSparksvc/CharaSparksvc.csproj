@@ -89,57 +89,56 @@
     <Compile Include="Controllers\error_logController.cs" />
     <Compile Include="Controllers\usersController.cs" />
     <Compile Include="Controllers\wishesController.cs" />
-    <Compile Include="Controllers\wish_statusController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CharaSparkEntities.Context.cs">
+    <Compile Include="Models\CharSparkEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CharaSparkEntities.Context.tt</DependentUpon>
+      <DependentUpon>CharSparkEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CharaSparkEntities.cs">
+    <Compile Include="Models\CharSparkEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CharaSparkEntities.tt</DependentUpon>
+      <DependentUpon>CharSparkEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CharaSparkEntities.Designer.cs">
+    <Compile Include="Models\CharSparkEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CharaSparkEntities.edmx</DependentUpon>
+      <DependentUpon>CharSparkEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\error_log.cs">
-      <DependentUpon>CharaSparkEntities.tt</DependentUpon>
+      <DependentUpon>CharSparkEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
-      <DependentUpon>CharaSparkEntities.tt</DependentUpon>
+      <DependentUpon>CharSparkEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\wish.cs">
-      <DependentUpon>CharaSparkEntities.tt</DependentUpon>
+      <DependentUpon>CharSparkEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\wish_status.cs">
-      <DependentUpon>CharaSparkEntities.tt</DependentUpon>
+      <DependentUpon>CharSparkEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="Models\CharaSparkEntities.edmx">
+    <EntityDeploy Include="Models\CharSparkEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>CharaSparkEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>CharSparkEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\CharaSparkEntities.Context.tt">
+    <Content Include="Models\CharSparkEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CharaSparkEntities.edmx</DependentUpon>
-      <LastGenOutput>CharaSparkEntities.Context.cs</LastGenOutput>
+      <DependentUpon>CharSparkEntities.edmx</DependentUpon>
+      <LastGenOutput>CharSparkEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\CharaSparkEntities.edmx.diagram">
-      <DependentUpon>CharaSparkEntities.edmx</DependentUpon>
+    <Content Include="Models\CharSparkEntities.edmx.diagram">
+      <DependentUpon>CharSparkEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\CharaSparkEntities.tt">
+    <Content Include="Models\CharSparkEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>CharaSparkEntities.edmx</DependentUpon>
-      <LastGenOutput>CharaSparkEntities.cs</LastGenOutput>
+      <DependentUpon>CharSparkEntities.edmx</DependentUpon>
+      <LastGenOutput>CharSparkEntities.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\CharaSparksvc.pubxml" />
     <None Include="Web.Debug.config">

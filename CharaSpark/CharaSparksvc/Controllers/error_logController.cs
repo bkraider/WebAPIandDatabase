@@ -14,7 +14,7 @@ namespace CharaSparksvc.Controllers
 {
     public class error_logController : ApiController
     {
-        private charasparkdevEntities db = new charasparkdevEntities();
+        private charasparkEntities db = new charasparkEntities();
 
         // GET: api/error_log
         public IQueryable<error_log> Geterror_log()
