@@ -1,0 +1,45 @@
+4/15/2015 11:32:49 AM	This log contains information about the import schema operation into project 'CharaSparkDB' on computer 'BKRAIDER-UB' by user 'bkraider'.
+4/15/2015 11:32:49 AM	Import of database schema has started.
+4/15/2015 11:32:51 AM	Gathering logins
+4/15/2015 11:32:54 AM	Gathering database options
+4/15/2015 11:32:54 AM	Gathering users
+4/15/2015 11:32:54 AM	Gathering roles
+4/15/2015 11:32:54 AM	Gathering application roles
+4/15/2015 11:32:54 AM	Gathering role memberships
+4/15/2015 11:32:54 AM	Gathering assemblies
+4/15/2015 11:32:54 AM	Gathering schemas
+4/15/2015 11:32:54 AM	Gathering XML schema collections
+4/15/2015 11:32:54 AM	Gathering user-defined data types
+4/15/2015 11:32:54 AM	Gathering user-defined types
+4/15/2015 11:32:54 AM	Gathering table types
+4/15/2015 11:32:54 AM	Gathering unique keys for table types
+4/15/2015 11:32:54 AM	Gathering primary keys for table types
+4/15/2015 11:32:54 AM	Gathering check constraints for table types
+4/15/2015 11:32:54 AM	Gathering default constraints for table types
+4/15/2015 11:32:54 AM	Gathering functions
+4/15/2015 11:32:54 AM	Gathering aggregates
+4/15/2015 11:32:54 AM	Gathering procedures
+4/15/2015 11:32:54 AM	Gathering tables
+4/15/2015 11:32:54 AM	Gathering primary keys
+4/15/2015 11:32:55 AM	Gathering unique constraints
+4/15/2015 11:32:55 AM	Gathering foreign keys
+4/15/2015 11:32:56 AM	Gathering default constraints
+4/15/2015 11:32:56 AM	Gathering check constraints
+4/15/2015 11:32:56 AM	Gathering views
+4/15/2015 11:32:56 AM	Gathering indexes
+4/15/2015 11:32:56 AM	Gathering statistics
+4/15/2015 11:32:56 AM	Gathering spatial indexes
+4/15/2015 11:32:56 AM	Gathering triggers
+4/15/2015 11:32:56 AM	Gathering ddl triggers
+4/15/2015 11:32:56 AM	Gathering synonyms
+4/15/2015 11:32:56 AM	Gathering defaults
+4/15/2015 11:32:56 AM	Gathering data constraint uddt bindings
+4/15/2015 11:32:56 AM	Gathering rules
+4/15/2015 11:32:56 AM	Gathering data constraint uddt bindings
+4/15/2015 11:32:56 AM	Gathering event notifications
+4/15/2015 11:32:56 AM	Gathering logins
+4/15/2015 11:32:57 AM	Scanning project for duplicate elements
+4/15/2015 11:32:58 AM	Finished duplicate element processing
+4/15/2015 11:32:58 AM	Finished importing database.
+4/15/2015 11:32:58 AM	A summary of the import was saved to the following location: C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\Import Schema Logs\CharaSparkDB_20150415033249.log
+4/15/2015 11:32:58 AM	Click Finish to continue...
