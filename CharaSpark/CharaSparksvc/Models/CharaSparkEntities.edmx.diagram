@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d4a01346365f4f4b8f8171526ddb8706" Name="Diagram1">
-        <EntityTypeShape EntityType="charasparkdevModel.error_log" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="charasparkdevModel.error_log" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="charasparkdevModel.user" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="charasparkdevModel.wish_status" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="charasparkdevModel.wish" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
