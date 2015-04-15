@@ -73,5 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CharaSparkDB.PRODDBpublish.xml" />
+    <None Include="CharaSparkDB.publishQA.xml" />
   </ItemGroup>
 </Project>

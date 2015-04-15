@@ -27,7 +27,7 @@ namespace CharaSparksvc.Models
     
         public virtual DbSet<error_log> error_log { get; set; }
         public virtual DbSet<user> users { get; set; }
-        public virtual DbSet<wish_status> wish_status { get; set; }
         public virtual DbSet<wish> wishes { get; set; }
+        public virtual DbSet<wish_status> wish_status { get; set; }
     }
 }

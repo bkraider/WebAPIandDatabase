@@ -28,20 +28,12 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="wish_status">
-      <EntityTypeMapping TypeName="charasparkdevModel.wish_status">
-        <MappingFragment StoreEntitySet="wish_status">
-          <ScalarProperty Name="wish_status_id" ColumnName="wish_status_id" />
-          <ScalarProperty Name="wish_status1" ColumnName="wish_status" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="wishes">
       <EntityTypeMapping TypeName="charasparkdevModel.wish">
         <MappingFragment StoreEntitySet="wishes">
+          <ScalarProperty Name="wish_status_id" ColumnName="wish_status_id" />
           <ScalarProperty Name="wish_id" ColumnName="wish_id" />
           <ScalarProperty Name="wish_name" ColumnName="wish_name" />
-          <ScalarProperty Name="task_status_id" ColumnName="task_status_id" />
           <ScalarProperty Name="create_date" ColumnName="create_date" />
           <ScalarProperty Name="created_by" ColumnName="created_by" />
           <ScalarProperty Name="update_date" ColumnName="update_date" />
@@ -49,6 +41,14 @@
           <ScalarProperty Name="start_date" ColumnName="start_date" />
           <ScalarProperty Name="end_date" ColumnName="end_date" />
           <ScalarProperty Name="userid" ColumnName="userid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="wish_status">
+      <EntityTypeMapping TypeName="charasparkdevModel.wish_status">
+        <MappingFragment StoreEntitySet="wish_status">
+          <ScalarProperty Name="wish_status1" ColumnName="wish_status" />
+          <ScalarProperty Name="wish_status_id" ColumnName="wish_status_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

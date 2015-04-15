@@ -26,21 +26,12 @@
     <Property Name="is_donor" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="wishes" Relationship="Self.FK_wishes_users" FromRole="users" ToRole="wishes" />
   </EntityType>
-  <EntityType Name="wish_status">
-    <Key>
-      <PropertyRef Name="wish_status_id" />
-    </Key>
-    <Property Name="wish_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="wish_status1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="wishes" Relationship="Self.FK_wishes_wish_status" FromRole="wish_status" ToRole="wishes" />
-  </EntityType>
   <EntityType Name="wish">
     <Key>
       <PropertyRef Name="wish_id" />
     </Key>
     <Property Name="wish_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="wish_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="task_status_id" Type="Int32" />
     <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="update_date" Type="DateTime" Precision="3" />
@@ -49,7 +40,8 @@
     <Property Name="end_date" Type="DateTime" Precision="3" />
     <Property Name="userid" Type="Int32" />
     <NavigationProperty Name="user" Relationship="Self.FK_wishes_users" FromRole="wishes" ToRole="users" />
-    <NavigationProperty Name="wish_status" Relationship="Self.FK_wishes_wish_status" FromRole="wishes" ToRole="wish_status" />
+    <Property Name="wish_status_id" Type="Int32" />
+    <NavigationProperty Name="wish_status" Relationship="charasparkdevModel.FK_wishes_wish_status" FromRole="wish" ToRole="wish_status" />
   </EntityType>
   <Association Name="FK_wishes_users">
     <End Role="users" Type="Self.user" Multiplicity="0..1" />
@@ -63,30 +55,38 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_wishes_wish_status">
-    <End Role="wish_status" Type="Self.wish_status" Multiplicity="0..1" />
-    <End Role="wishes" Type="Self.wish" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="wish_status">
-        <PropertyRef Name="wish_status_id" />
-      </Principal>
-      <Dependent Role="wishes">
-        <PropertyRef Name="task_status_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="charasparkdevEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="error_log" EntityType="Self.error_log" />
     <EntitySet Name="users" EntityType="Self.user" />
-    <EntitySet Name="wish_status" EntityType="Self.wish_status" />
     <EntitySet Name="wishes" EntityType="Self.wish" />
     <AssociationSet Name="FK_wishes_users" Association="Self.FK_wishes_users">
       <End Role="users" EntitySet="users" />
       <End Role="wishes" EntitySet="wishes" />
     </AssociationSet>
-    <AssociationSet Name="FK_wishes_wish_status" Association="Self.FK_wishes_wish_status">
+    <EntitySet Name="wish_status" EntityType="charasparkdevModel.wish_status" />
+    <AssociationSet Name="FK_wishes_wish_status" Association="charasparkdevModel.FK_wishes_wish_status">
       <End Role="wish_status" EntitySet="wish_status" />
-      <End Role="wishes" EntitySet="wishes" />
+      <End Role="wish" EntitySet="wishes" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="wish_status">
+    <Key>
+      <PropertyRef Name="wish_status_id" />
+    </Key>
+    <Property Name="wish_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="wish_status1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="wishes" Relationship="charasparkdevModel.FK_wishes_wish_status" FromRole="wish_status" ToRole="wish" />
+  </EntityType>
+  <Association Name="FK_wishes_wish_status">
+    <End Type="charasparkdevModel.wish_status" Role="wish_status" Multiplicity="0..1" />
+    <End Type="charasparkdevModel.wish" Role="wish" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="wish_status">
+        <PropertyRef Name="wish_status_id" />
+      </Principal>
+      <Dependent Role="wish">
+        <PropertyRef Name="wish_status_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

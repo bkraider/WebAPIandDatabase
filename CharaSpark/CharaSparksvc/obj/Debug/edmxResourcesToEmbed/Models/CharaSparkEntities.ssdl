@@ -38,7 +38,7 @@
     </Key>
     <Property Name="wish_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="wish_name" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="task_status_id" Type="int" />
+    <Property Name="wish_status_id" Type="int" />
     <Property Name="create_date" Type="datetime" Nullable="false" />
     <Property Name="created_by" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="update_date" Type="datetime" />
@@ -67,7 +67,7 @@
         <PropertyRef Name="wish_status_id" />
       </Principal>
       <Dependent Role="wishes">
-        <PropertyRef Name="task_status_id" />
+        <PropertyRef Name="wish_status_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

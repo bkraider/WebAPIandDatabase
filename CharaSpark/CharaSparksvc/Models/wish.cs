@@ -16,7 +16,6 @@ namespace CharaSparksvc.Models
     {
         public int wish_id { get; set; }
         public string wish_name { get; set; }
-        public Nullable<int> task_status_id { get; set; }
         public System.DateTime create_date { get; set; }
         public string created_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
@@ -24,6 +23,7 @@ namespace CharaSparksvc.Models
         public Nullable<System.DateTime> start_date { get; set; }
         public Nullable<System.DateTime> end_date { get; set; }
         public Nullable<int> userid { get; set; }
+        public Nullable<int> wish_status_id { get; set; }
     
         public virtual user user { get; set; }
         public virtual wish_status wish_status { get; set; }
