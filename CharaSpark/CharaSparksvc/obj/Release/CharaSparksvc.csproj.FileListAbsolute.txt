@@ -1,0 +1,17 @@
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\CharaSparksvc.dll.config
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\CharaSparksvc.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\CharaSparksvc.pdb
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\EntityFramework.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\EntityFramework.SqlServer.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\Newtonsoft.Json.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Net.Http.Formatting.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Http.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Http.WebHost.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\EntityFramework.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\EntityFramework.SqlServer.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\Newtonsoft.Json.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Net.Http.Formatting.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Http.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Http.WebHost.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\obj\Release\CharaSparksvc.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\obj\Release\CharaSparksvc.pdb
