@@ -1,9 +1,0 @@
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\bin\Debug\NoBarriersDatabase.dacpac
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\bin\Debug\NoBarriersDatabase.dll
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\bin\Debug\NoBarriersDatabase.pdb
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\obj\Debug\NoBarriersDatabase.dll
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\obj\Debug\NoBarriersDatabase.pdb
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\obj\Debug\Model.xml
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\obj\Debug\refactor.xml
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\obj\Debug\postdeploy.sql
-C:\projects\nobarriers\NoBarriers\NoBarriersDatabase\obj\Debug\predeploy.sql
