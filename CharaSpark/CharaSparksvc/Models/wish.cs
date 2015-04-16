@@ -23,7 +23,7 @@ namespace CharaSparksvc.Models
         public bool is_active { get; set; }
         public Nullable<System.DateTime> start_date { get; set; }
         public Nullable<System.DateTime> end_date { get; set; }
-        public Nullable<int> userid { get; set; }
+        public Nullable<int> user_id { get; set; }
     
         public virtual user user { get; set; }
         public virtual wish_status wish_status { get; set; }

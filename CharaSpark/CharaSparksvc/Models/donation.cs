@@ -12,28 +12,21 @@ namespace CharaSparksvc.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class user
+    public partial class donation
     {
-        public user()
-        {
-            this.donations = new HashSet<donation>();
-            this.wishes = new HashSet<wish>();
-        }
-    
-        public int user_id { get; set; }
-        public string first_name { get; set; }
-        public string middle_name { get; set; }
-        public string last_name { get; set; }
-        public string former_name { get; set; }
-        public string login_id { get; set; }
-        public string e_mail { get; set; }
+        public int donation_id { get; set; }
+        public decimal donation_amount { get; set; }
+        public Nullable<int> donation_status_id { get; set; }
         public System.DateTime create_date { get; set; }
         public string created_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
         public bool is_active { get; set; }
-        public bool is_donor { get; set; }
+        public Nullable<System.DateTime> start_date { get; set; }
+        public Nullable<System.DateTime> end_date { get; set; }
+        public Nullable<int> user_id { get; set; }
+        public string charity_name { get; set; }
     
-        public virtual ICollection<donation> donations { get; set; }
-        public virtual ICollection<wish> wishes { get; set; }
+        public virtual donation_status donation_status { get; set; }
+        public virtual user user { get; set; }
     }
 }

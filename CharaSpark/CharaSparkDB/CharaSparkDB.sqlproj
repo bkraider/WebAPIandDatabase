@@ -70,6 +70,8 @@
     <Build Include="Security\yIjkgMHAdqLogin_nobarrierswebsvcUser.sql" />
     <Build Include="Security\yIjkgMHAdqLogin_nobarrierswebsvc.sql" />
     <Build Include="Security\nobarrierswebsvc.sql" />
+    <Build Include="dbo\Tables\donations.sql" />
+    <Build Include="dbo\Tables\donation_status.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CharaSparkDB.PRODDBpublish.xml" />

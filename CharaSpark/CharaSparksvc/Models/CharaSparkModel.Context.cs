@@ -25,6 +25,8 @@ namespace CharaSparksvc.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<donation_status> donation_status { get; set; }
+        public virtual DbSet<donation> donations { get; set; }
         public virtual DbSet<error_log> error_log { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<wish_status> wish_status { get; set; }

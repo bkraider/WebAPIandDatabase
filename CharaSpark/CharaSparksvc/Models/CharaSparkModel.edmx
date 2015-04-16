@@ -5,6 +5,29 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="charasparkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="donation_status">
+          <Key>
+            <PropertyRef Name="donation_status_id" />
+          </Key>
+          <Property Name="donation_status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donation_status_desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="donations">
+          <Key>
+            <PropertyRef Name="donation_id" />
+          </Key>
+          <Property Name="donation_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="donation_amount" Type="money" Nullable="false" />
+          <Property Name="donation_status_id" Type="int" />
+          <Property Name="create_date" Type="datetime" Nullable="false" />
+          <Property Name="created_by" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="is_active" Type="bit" Nullable="false" />
+          <Property Name="start_date" Type="datetime" />
+          <Property Name="end_date" Type="datetime" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="charity_name" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="error_log">
           <Key>
             <PropertyRef Name="error_id" />
@@ -50,8 +73,32 @@
           <Property Name="is_active" Type="bit" Nullable="false" />
           <Property Name="start_date" Type="datetime" />
           <Property Name="end_date" Type="datetime" />
-          <Property Name="userid" Type="int" />
+          <Property Name="user_id" Type="int" />
         </EntityType>
+        <Association Name="FK_donations_donation_status">
+          <End Role="donation_status" Type="Self.donation_status" Multiplicity="0..1" />
+          <End Role="donations" Type="Self.donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donation_status">
+              <PropertyRef Name="donation_status_id" />
+            </Principal>
+            <Dependent Role="donations">
+              <PropertyRef Name="donation_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_donations_users">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="donations" Type="Self.donations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="donations">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_wishes_users">
           <End Role="users" Type="Self.users" Multiplicity="0..1" />
           <End Role="wishes" Type="Self.wishes" Multiplicity="*" />
@@ -60,7 +107,7 @@
               <PropertyRef Name="user_id" />
             </Principal>
             <Dependent Role="wishes">
-              <PropertyRef Name="userid" />
+              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -77,10 +124,20 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="charasparkModelStoreContainer">
+          <EntitySet Name="donation_status" EntityType="Self.donation_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="donations" EntityType="Self.donations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="error_log" EntityType="Self.error_log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wish_status" EntityType="Self.wish_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wishes" EntityType="Self.wishes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_donations_donation_status" Association="Self.FK_donations_donation_status">
+            <End Role="donation_status" EntitySet="donation_status" />
+            <End Role="donations" EntitySet="donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_donations_users" Association="Self.FK_donations_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="donations" EntitySet="donations" />
+          </AssociationSet>
           <AssociationSet Name="FK_wishes_users" Association="Self.FK_wishes_users">
             <End Role="users" EntitySet="users" />
             <End Role="wishes" EntitySet="wishes" />
@@ -95,6 +152,32 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="charasparkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="donation_status">
+          <Key>
+            <PropertyRef Name="donation_status_id" />
+          </Key>
+          <Property Name="donation_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="donation_status_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="donations" Relationship="Self.FK_donations_donation_status" FromRole="donation_status" ToRole="donations" />
+        </EntityType>
+        <EntityType Name="donation">
+          <Key>
+            <PropertyRef Name="donation_id" />
+          </Key>
+          <Property Name="donation_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="donation_amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="donation_status_id" Type="Int32" />
+          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="is_active" Type="Boolean" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Precision="3" />
+          <Property Name="end_date" Type="DateTime" Precision="3" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="charity_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="donation_status" Relationship="Self.FK_donations_donation_status" FromRole="donations" ToRole="donation_status" />
+          <NavigationProperty Name="user" Relationship="Self.FK_donations_users" FromRole="donations" ToRole="users" />
+        </EntityType>
         <EntityType Name="error_log">
           <Key>
             <PropertyRef Name="error_id" />
@@ -119,6 +202,7 @@
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <Property Name="is_active" Type="Boolean" Nullable="false" />
           <Property Name="is_donor" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="donations" Relationship="Self.FK_donations_users" FromRole="users" ToRole="donations" />
           <NavigationProperty Name="wishes" Relationship="Self.FK_wishes_users" FromRole="users" ToRole="wishes" />
         </EntityType>
         <EntityType Name="wish_status">
@@ -142,10 +226,34 @@
           <Property Name="is_active" Type="Boolean" Nullable="false" />
           <Property Name="start_date" Type="DateTime" Precision="3" />
           <Property Name="end_date" Type="DateTime" Precision="3" />
-          <Property Name="userid" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
           <NavigationProperty Name="user" Relationship="Self.FK_wishes_users" FromRole="wishes" ToRole="users" />
           <NavigationProperty Name="wish_status" Relationship="Self.FK_wishes_wish_status" FromRole="wishes" ToRole="wish_status" />
         </EntityType>
+        <Association Name="FK_donations_donation_status">
+          <End Role="donation_status" Type="Self.donation_status" Multiplicity="0..1" />
+          <End Role="donations" Type="Self.donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donation_status">
+              <PropertyRef Name="donation_status_id" />
+            </Principal>
+            <Dependent Role="donations">
+              <PropertyRef Name="donation_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_donations_users">
+          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="donations" Type="Self.donation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="donations">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_wishes_users">
           <End Role="users" Type="Self.user" Multiplicity="0..1" />
           <End Role="wishes" Type="Self.wish" Multiplicity="*" />
@@ -154,7 +262,7 @@
               <PropertyRef Name="user_id" />
             </Principal>
             <Dependent Role="wishes">
-              <PropertyRef Name="userid" />
+              <PropertyRef Name="user_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -171,10 +279,20 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="charasparkEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="donation_status" EntityType="Self.donation_status" />
+          <EntitySet Name="donations" EntityType="Self.donation" />
           <EntitySet Name="error_log" EntityType="Self.error_log" />
           <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="wish_status" EntityType="Self.wish_status" />
           <EntitySet Name="wishes" EntityType="Self.wish" />
+          <AssociationSet Name="FK_donations_donation_status" Association="Self.FK_donations_donation_status">
+            <End Role="donation_status" EntitySet="donation_status" />
+            <End Role="donations" EntitySet="donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_donations_users" Association="Self.FK_donations_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="donations" EntitySet="donations" />
+          </AssociationSet>
           <AssociationSet Name="FK_wishes_users" Association="Self.FK_wishes_users">
             <End Role="users" EntitySet="users" />
             <End Role="wishes" EntitySet="wishes" />
@@ -190,6 +308,31 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="charasparkModelStoreContainer" CdmEntityContainer="charasparkEntities">
+          <EntitySetMapping Name="donation_status">
+            <EntityTypeMapping TypeName="charasparkModel.donation_status">
+              <MappingFragment StoreEntitySet="donation_status">
+                <ScalarProperty Name="donation_status_id" ColumnName="donation_status_id" />
+                <ScalarProperty Name="donation_status_desc" ColumnName="donation_status_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="donations">
+            <EntityTypeMapping TypeName="charasparkModel.donation">
+              <MappingFragment StoreEntitySet="donations">
+                <ScalarProperty Name="donation_id" ColumnName="donation_id" />
+                <ScalarProperty Name="donation_amount" ColumnName="donation_amount" />
+                <ScalarProperty Name="donation_status_id" ColumnName="donation_status_id" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="charity_name" ColumnName="charity_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="error_log">
             <EntityTypeMapping TypeName="charasparkModel.error_log">
               <MappingFragment StoreEntitySet="error_log">
@@ -237,7 +380,7 @@
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
-                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
