@@ -26,13 +26,15 @@ namespace CharaSparksvc.Controllers
         [ResponseType(typeof(user))]
         public IHttpActionResult Getuser(int id)
         {
-            user user = db.users.Find(id);
-            if (user == null)
+
+            user usr = new user();
+            usr = db.users.Find(id);
+            if (usr == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(usr);
         }
 
         // PUT: api/users/5

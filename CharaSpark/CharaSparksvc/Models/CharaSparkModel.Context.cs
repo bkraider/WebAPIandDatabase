@@ -18,6 +18,7 @@ namespace CharaSparksvc.Models
         public charasparkEntities()
             : base("name=charasparkEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

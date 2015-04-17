@@ -278,7 +278,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="charasparkEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="charasparkEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="donation_status" EntityType="Self.donation_status" />
           <EntitySet Name="donations" EntityType="Self.donation" />
           <EntitySet Name="error_log" EntityType="Self.error_log" />

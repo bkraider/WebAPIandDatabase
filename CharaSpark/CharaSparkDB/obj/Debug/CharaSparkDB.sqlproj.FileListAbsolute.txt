@@ -3,7 +3,3 @@ C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\bin
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\bin\Debug\CharaSparkDB.pdb
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\obj\Debug\CharaSparkDB.dll
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\obj\Debug\CharaSparkDB.pdb
-C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\obj\Debug\Model.xml
-C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\obj\Debug\refactor.xml
-C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\obj\Debug\postdeploy.sql
-C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparkDB\obj\Debug\predeploy.sql

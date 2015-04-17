@@ -16,3 +16,16 @@ C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bi
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\obj\Release\CharaSparksvc.dll
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\obj\Release\CharaSparksvc.pdb
 C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\obj\Release\CharaSparksvc.csprojResolveAssemblyReference.cache
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Helpers.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Mvc.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Razor.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.WebPages.Deployment.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.WebPages.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.WebPages.Razor.dll
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Helpers.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Mvc.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.Razor.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.WebPages.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.WebPages.Deployment.xml
+C:\Users\bkraider\Documents\GitHub\WebAPIandDatabase\CharaSpark\CharaSparksvc\bin\System.Web.WebPages.Razor.xml
