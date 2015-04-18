@@ -20,7 +20,7 @@ namespace CharaSparksvc.Models
         }
     
         public int wish_status_id { get; set; }
-        public string wish_status1 { get; set; }
+        public string wish_status_desc { get; set; }
     
         public virtual ICollection<wish> wishes { get; set; }
     }

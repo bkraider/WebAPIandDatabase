@@ -31,9 +31,11 @@ namespace CharaSparksvc.Models
         public string created_by { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
         public bool is_active { get; set; }
-        public bool is_donor { get; set; }
+        public int user_type_id { get; set; }
+        public string password { get; set; }
     
         public virtual ICollection<donation> donations { get; set; }
+        public virtual user_type user_type { get; set; }
         public virtual ICollection<wish> wishes { get; set; }
     }
 }

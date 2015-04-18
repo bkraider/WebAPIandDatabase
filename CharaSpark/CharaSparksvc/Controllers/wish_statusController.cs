@@ -7,49 +7,59 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.OData;
+using System.Web.Http.OData.Routing;
 using CharaSparksvc.Models;
 
 namespace CharaSparksvc.Controllers
 {
-    public class wish_statusController : ApiController
+    /*
+    The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
+
+    using System.Web.Http.OData.Builder;
+    using System.Web.Http.OData.Extensions;
+    using CharaSparksvc.Models;
+    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+    builder.EntitySet<wish_status>("wish_status");
+    builder.EntitySet<wish>("wishes"); 
+    config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+    */
+    public class wish_statusController : ODataController
     {
         private charasparkEntities db = new charasparkEntities();
 
-        // GET: api/wish_status
+        // GET: odata/wish_status
+        [EnableQuery]
         public IQueryable<wish_status> Getwish_status()
         {
             return db.wish_status;
         }
 
-        // GET: api/wish_status/5
-        [ResponseType(typeof(wish_status))]
-        public IHttpActionResult Getwish_status(int id)
+        // GET: odata/wish_status(5)
+        [EnableQuery]
+        public SingleResult<wish_status> Getwish_status([FromODataUri] int key)
         {
-            wish_status wish_status = db.wish_status.Find(id);
-            if (wish_status == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(wish_status);
+            return SingleResult.Create(db.wish_status.Where(wish_status => wish_status.wish_status_id == key));
         }
 
-        // PUT: api/wish_status/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putwish_status(int id, wish_status wish_status)
+        // PUT: odata/wish_status(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<wish_status> patch)
         {
+            Validate(patch.GetEntity());
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != wish_status.wish_status_id)
+            wish_status wish_status = db.wish_status.Find(key);
+            if (wish_status == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            db.Entry(wish_status).State = EntityState.Modified;
+            patch.Put(wish_status);
 
             try
             {
@@ -57,7 +67,7 @@ namespace CharaSparksvc.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!wish_statusExists(id))
+                if (!wish_statusExists(key))
                 {
                     return NotFound();
                 }
@@ -67,12 +77,11 @@ namespace CharaSparksvc.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Updated(wish_status);
         }
 
-        // POST: api/wish_status
-        [ResponseType(typeof(wish_status))]
-        public IHttpActionResult Postwish_status(wish_status wish_status)
+        // POST: odata/wish_status
+        public IHttpActionResult Post(wish_status wish_status)
         {
             if (!ModelState.IsValid)
             {
@@ -82,14 +91,51 @@ namespace CharaSparksvc.Controllers
             db.wish_status.Add(wish_status);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = wish_status.wish_status_id }, wish_status);
+            return Created(wish_status);
         }
 
-        // DELETE: api/wish_status/5
-        [ResponseType(typeof(wish_status))]
-        public IHttpActionResult Deletewish_status(int id)
+        // PATCH: odata/wish_status(5)
+        [AcceptVerbs("PATCH", "MERGE")]
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<wish_status> patch)
         {
-            wish_status wish_status = db.wish_status.Find(id);
+            Validate(patch.GetEntity());
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            wish_status wish_status = db.wish_status.Find(key);
+            if (wish_status == null)
+            {
+                return NotFound();
+            }
+
+            patch.Patch(wish_status);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!wish_statusExists(key))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Updated(wish_status);
+        }
+
+        // DELETE: odata/wish_status(5)
+        public IHttpActionResult Delete([FromODataUri] int key)
+        {
+            wish_status wish_status = db.wish_status.Find(key);
             if (wish_status == null)
             {
                 return NotFound();
@@ -98,7 +144,14 @@ namespace CharaSparksvc.Controllers
             db.wish_status.Remove(wish_status);
             db.SaveChanges();
 
-            return Ok(wish_status);
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET: odata/wish_status(5)/wishes
+        [EnableQuery]
+        public IQueryable<wish> Getwishes([FromODataUri] int key)
+        {
+            return db.wish_status.Where(m => m.wish_status_id == key).SelectMany(m => m.wishes);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +163,9 @@ namespace CharaSparksvc.Controllers
             base.Dispose(disposing);
         }
 
-        private bool wish_statusExists(int id)
+        private bool wish_statusExists(int key)
         {
-            return db.wish_status.Count(e => e.wish_status_id == id) > 0;
+            return db.wish_status.Count(e => e.wish_status_id == key) > 0;
         }
     }
 }

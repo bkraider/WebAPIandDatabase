@@ -35,6 +35,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="user_type">
+      <EntityTypeMapping TypeName="charasparkModel.user_type">
+        <MappingFragment StoreEntitySet="user_type">
+          <ScalarProperty Name="user_type_id" ColumnName="user_type_id" />
+          <ScalarProperty Name="user_type_desc" ColumnName="user_type_desc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="users">
       <EntityTypeMapping TypeName="charasparkModel.user">
         <MappingFragment StoreEntitySet="users">
@@ -49,7 +57,8 @@
           <ScalarProperty Name="created_by" ColumnName="created_by" />
           <ScalarProperty Name="update_date" ColumnName="update_date" />
           <ScalarProperty Name="is_active" ColumnName="is_active" />
-          <ScalarProperty Name="is_donor" ColumnName="is_donor" />
+          <ScalarProperty Name="user_type_id" ColumnName="user_type_id" />
+          <ScalarProperty Name="password" ColumnName="password" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -57,7 +66,7 @@
       <EntityTypeMapping TypeName="charasparkModel.wish_status">
         <MappingFragment StoreEntitySet="wish_status">
           <ScalarProperty Name="wish_status_id" ColumnName="wish_status_id" />
-          <ScalarProperty Name="wish_status1" ColumnName="wish_status" />
+          <ScalarProperty Name="wish_status_desc" ColumnName="wish_status_desc" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -74,6 +83,12 @@
           <ScalarProperty Name="start_date" ColumnName="start_date" />
           <ScalarProperty Name="end_date" ColumnName="end_date" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="fullfiller_user_id" ColumnName="fullfiller_user_id" />
+          <ScalarProperty Name="gps_coordinates" ColumnName="gps_coordinates" />
+          <ScalarProperty Name="donation_amount" ColumnName="donation_amount" />
+          <ScalarProperty Name="charity_name" ColumnName="charity_name" />
+          <ScalarProperty Name="charity_email" ColumnName="charity_email" />
+          <ScalarProperty Name="donation_status_id" ColumnName="donation_status_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -70,11 +70,15 @@
     <Build Include="Security\yIjkgMHAdqLogin_nobarrierswebsvcUser.sql" />
     <Build Include="Security\yIjkgMHAdqLogin_nobarrierswebsvc.sql" />
     <Build Include="Security\nobarrierswebsvc.sql" />
-    <Build Include="dbo\Tables\donations.sql" />
     <Build Include="dbo\Tables\donation_status.sql" />
+    <Build Include="dbo\Tables\user_type.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CharaSparkDB.PRODDBpublish.xml" />
     <None Include="CharaSparkDB.publishQA.xml" />
+    <None Include="CharaSparkDB.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="CharaSparkDB.refactorlog" />
   </ItemGroup>
 </Project>

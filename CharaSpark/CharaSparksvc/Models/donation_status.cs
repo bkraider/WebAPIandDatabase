@@ -17,11 +17,13 @@ namespace CharaSparksvc.Models
         public donation_status()
         {
             this.donations = new HashSet<donation>();
+            this.wishes = new HashSet<wish>();
         }
     
         public int donation_status_id { get; set; }
         public string donation_status_desc { get; set; }
     
         public virtual ICollection<donation> donations { get; set; }
+        public virtual ICollection<wish> wishes { get; set; }
     }
 }

@@ -4,15 +4,18 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1a0f44542bca418bad6d9cca1fb045df" Name="Diagram1">
-        <EntityTypeShape EntityType="charasparkModel.donation_status" Width="1.5" PointX="0.5" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="charasparkModel.donation" Width="1.5" PointX="3.625" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="charasparkModel.error_log" Width="1.5" PointX="5.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="charasparkModel.user" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="charasparkModel.wish_status" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="charasparkModel.wish" Width="1.5" PointX="7.875" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="d264cf89a321409eb5680cd47d9497d6" Name="Diagram1">
+        <EntityTypeShape EntityType="charasparkModel.donation_status" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="charasparkModel.donation" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="charasparkModel.error_log" Width="1.5" PointX="5.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="charasparkModel.user_type" Width="1.5" PointX="1.5" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="charasparkModel.user" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="charasparkModel.wish_status" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="charasparkModel.wish" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
         <AssociationConnector Association="charasparkModel.FK_donations_donation_status" ManuallyRouted="false" />
+        <AssociationConnector Association="charasparkModel.FK_wishes_donation_status" ManuallyRouted="false" />
         <AssociationConnector Association="charasparkModel.FK_donations_users" ManuallyRouted="false" />
+        <AssociationConnector Association="charasparkModel.FK_users_user_type" ManuallyRouted="false" />
         <AssociationConnector Association="charasparkModel.FK_wishes_users" ManuallyRouted="false" />
         <AssociationConnector Association="charasparkModel.FK_wishes_wish_status" ManuallyRouted="false" />
       </Diagram>

@@ -36,6 +36,13 @@
           <Property Name="error_desc" Type="varchar(max)" />
           <Property Name="error_date" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="user_type">
+          <Key>
+            <PropertyRef Name="user_type_id" />
+          </Key>
+          <Property Name="user_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_type_desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="users">
           <Key>
             <PropertyRef Name="user_id" />
@@ -51,14 +58,15 @@
           <Property Name="created_by" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="update_date" Type="datetime" />
           <Property Name="is_active" Type="bit" Nullable="false" />
-          <Property Name="is_donor" Type="bit" Nullable="false" />
+          <Property Name="user_type_id" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="wish_status">
           <Key>
             <PropertyRef Name="wish_status_id" />
           </Key>
           <Property Name="wish_status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="wish_status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="wish_status_desc" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="wishes">
           <Key>
@@ -73,7 +81,13 @@
           <Property Name="is_active" Type="bit" Nullable="false" />
           <Property Name="start_date" Type="datetime" />
           <Property Name="end_date" Type="datetime" />
-          <Property Name="user_id" Type="int" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="fullfiller_user_id" Type="int" />
+          <Property Name="gps_coordinates" Type="varchar" MaxLength="50" />
+          <Property Name="donation_amount" Type="money" />
+          <Property Name="charity_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="charity_email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="donation_status_id" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_donations_donation_status">
           <End Role="donation_status" Type="Self.donation_status" Multiplicity="0..1" />
@@ -99,8 +113,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_users_user_type">
+          <End Role="user_type" Type="Self.user_type" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_type">
+              <PropertyRef Name="user_type_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="user_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_wishes_donation_status">
+          <End Role="donation_status" Type="Self.donation_status" Multiplicity="1" />
+          <End Role="wishes" Type="Self.wishes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donation_status">
+              <PropertyRef Name="donation_status_id" />
+            </Principal>
+            <Dependent Role="wishes">
+              <PropertyRef Name="donation_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_wishes_users">
-          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="wishes" Type="Self.wishes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="users">
@@ -127,6 +165,7 @@
           <EntitySet Name="donation_status" EntityType="Self.donation_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="donations" EntityType="Self.donations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="error_log" EntityType="Self.error_log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_type" EntityType="Self.user_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wish_status" EntityType="Self.wish_status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wishes" EntityType="Self.wishes" Schema="dbo" store:Type="Tables" />
@@ -137,6 +176,14 @@
           <AssociationSet Name="FK_donations_users" Association="Self.FK_donations_users">
             <End Role="users" EntitySet="users" />
             <End Role="donations" EntitySet="donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_user_type" Association="Self.FK_users_user_type">
+            <End Role="user_type" EntitySet="user_type" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_wishes_donation_status" Association="Self.FK_wishes_donation_status">
+            <End Role="donation_status" EntitySet="donation_status" />
+            <End Role="wishes" EntitySet="wishes" />
           </AssociationSet>
           <AssociationSet Name="FK_wishes_users" Association="Self.FK_wishes_users">
             <End Role="users" EntitySet="users" />
@@ -159,6 +206,7 @@
           <Property Name="donation_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="donation_status_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="donations" Relationship="Self.FK_donations_donation_status" FromRole="donation_status" ToRole="donations" />
+          <NavigationProperty Name="wishes" Relationship="Self.FK_wishes_donation_status" FromRole="donation_status" ToRole="wishes" />
         </EntityType>
         <EntityType Name="donation">
           <Key>
@@ -186,6 +234,14 @@
           <Property Name="error_desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="error_date" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="user_type">
+          <Key>
+            <PropertyRef Name="user_type_id" />
+          </Key>
+          <Property Name="user_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_type_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_users_user_type" FromRole="user_type" ToRole="users" />
+        </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="user_id" />
@@ -201,8 +257,10 @@
           <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <Property Name="is_active" Type="Boolean" Nullable="false" />
-          <Property Name="is_donor" Type="Boolean" Nullable="false" />
+          <Property Name="user_type_id" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="donations" Relationship="Self.FK_donations_users" FromRole="users" ToRole="donations" />
+          <NavigationProperty Name="user_type" Relationship="Self.FK_users_user_type" FromRole="users" ToRole="user_type" />
           <NavigationProperty Name="wishes" Relationship="Self.FK_wishes_users" FromRole="users" ToRole="wishes" />
         </EntityType>
         <EntityType Name="wish_status">
@@ -210,7 +268,7 @@
             <PropertyRef Name="wish_status_id" />
           </Key>
           <Property Name="wish_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="wish_status1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="wish_status_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="wishes" Relationship="Self.FK_wishes_wish_status" FromRole="wish_status" ToRole="wishes" />
         </EntityType>
         <EntityType Name="wish">
@@ -226,7 +284,14 @@
           <Property Name="is_active" Type="Boolean" Nullable="false" />
           <Property Name="start_date" Type="DateTime" Precision="3" />
           <Property Name="end_date" Type="DateTime" Precision="3" />
-          <Property Name="user_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="fullfiller_user_id" Type="Int32" />
+          <Property Name="gps_coordinates" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="donation_amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="charity_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="charity_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="donation_status_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="donation_status" Relationship="Self.FK_wishes_donation_status" FromRole="wishes" ToRole="donation_status" />
           <NavigationProperty Name="user" Relationship="Self.FK_wishes_users" FromRole="wishes" ToRole="users" />
           <NavigationProperty Name="wish_status" Relationship="Self.FK_wishes_wish_status" FromRole="wishes" ToRole="wish_status" />
         </EntityType>
@@ -238,6 +303,18 @@
               <PropertyRef Name="donation_status_id" />
             </Principal>
             <Dependent Role="donations">
+              <PropertyRef Name="donation_status_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_wishes_donation_status">
+          <End Role="donation_status" Type="Self.donation_status" Multiplicity="1" />
+          <End Role="wishes" Type="Self.wish" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="donation_status">
+              <PropertyRef Name="donation_status_id" />
+            </Principal>
+            <Dependent Role="wishes">
               <PropertyRef Name="donation_status_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -254,8 +331,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_users_user_type">
+          <End Role="user_type" Type="Self.user_type" Multiplicity="1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_type">
+              <PropertyRef Name="user_type_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="user_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_wishes_users">
-          <End Role="users" Type="Self.user" Multiplicity="0..1" />
+          <End Role="users" Type="Self.user" Multiplicity="1" />
           <End Role="wishes" Type="Self.wish" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="users">
@@ -282,6 +371,7 @@
           <EntitySet Name="donation_status" EntityType="Self.donation_status" />
           <EntitySet Name="donations" EntityType="Self.donation" />
           <EntitySet Name="error_log" EntityType="Self.error_log" />
+          <EntitySet Name="user_type" EntityType="Self.user_type" />
           <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="wish_status" EntityType="Self.wish_status" />
           <EntitySet Name="wishes" EntityType="Self.wish" />
@@ -289,9 +379,17 @@
             <End Role="donation_status" EntitySet="donation_status" />
             <End Role="donations" EntitySet="donations" />
           </AssociationSet>
+          <AssociationSet Name="FK_wishes_donation_status" Association="Self.FK_wishes_donation_status">
+            <End Role="donation_status" EntitySet="donation_status" />
+            <End Role="wishes" EntitySet="wishes" />
+          </AssociationSet>
           <AssociationSet Name="FK_donations_users" Association="Self.FK_donations_users">
             <End Role="users" EntitySet="users" />
             <End Role="donations" EntitySet="donations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_user_type" Association="Self.FK_users_user_type">
+            <End Role="user_type" EntitySet="user_type" />
+            <End Role="users" EntitySet="users" />
           </AssociationSet>
           <AssociationSet Name="FK_wishes_users" Association="Self.FK_wishes_users">
             <End Role="users" EntitySet="users" />
@@ -342,6 +440,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="user_type">
+            <EntityTypeMapping TypeName="charasparkModel.user_type">
+              <MappingFragment StoreEntitySet="user_type">
+                <ScalarProperty Name="user_type_id" ColumnName="user_type_id" />
+                <ScalarProperty Name="user_type_desc" ColumnName="user_type_desc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="charasparkModel.user">
               <MappingFragment StoreEntitySet="users">
@@ -356,7 +462,8 @@
                 <ScalarProperty Name="created_by" ColumnName="created_by" />
                 <ScalarProperty Name="update_date" ColumnName="update_date" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
-                <ScalarProperty Name="is_donor" ColumnName="is_donor" />
+                <ScalarProperty Name="user_type_id" ColumnName="user_type_id" />
+                <ScalarProperty Name="password" ColumnName="password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -364,7 +471,7 @@
             <EntityTypeMapping TypeName="charasparkModel.wish_status">
               <MappingFragment StoreEntitySet="wish_status">
                 <ScalarProperty Name="wish_status_id" ColumnName="wish_status_id" />
-                <ScalarProperty Name="wish_status1" ColumnName="wish_status" />
+                <ScalarProperty Name="wish_status_desc" ColumnName="wish_status_desc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -381,6 +488,12 @@
                 <ScalarProperty Name="start_date" ColumnName="start_date" />
                 <ScalarProperty Name="end_date" ColumnName="end_date" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="fullfiller_user_id" ColumnName="fullfiller_user_id" />
+                <ScalarProperty Name="gps_coordinates" ColumnName="gps_coordinates" />
+                <ScalarProperty Name="donation_amount" ColumnName="donation_amount" />
+                <ScalarProperty Name="charity_name" ColumnName="charity_name" />
+                <ScalarProperty Name="charity_email" ColumnName="charity_email" />
+                <ScalarProperty Name="donation_status_id" ColumnName="donation_status_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

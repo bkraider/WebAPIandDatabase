@@ -7,51 +7,61 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.OData;
+using System.Web.Http.OData.Routing;
 using CharaSparksvc.Models;
 
 namespace CharaSparksvc.Controllers
 {
-    public class usersController : ApiController
+    /*
+    The WebApiConfig class may require additional changes to add a route for this controller. Merge these statements into the Register method of the WebApiConfig class as applicable. Note that OData URLs are case sensitive.
+
+    using System.Web.Http.OData.Builder;
+    using System.Web.Http.OData.Extensions;
+    using CharaSparksvc.Models;
+    ODataConventionModelBuilder builder = new ODataConventionModelBuilder();
+    builder.EntitySet<user>("users");
+    builder.EntitySet<donation>("donations"); 
+    builder.EntitySet<user_type>("user_type"); 
+    builder.EntitySet<wish>("wishes"); 
+    config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+    */
+    public class usersController : ODataController
     {
         private charasparkEntities db = new charasparkEntities();
 
-        // GET: api/users
+        // GET: odata/users
+        [EnableQuery]
         public IQueryable<user> Getusers()
         {
             return db.users;
         }
 
-        // GET: api/users/5
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Getuser(int id)
+        // GET: odata/users(5)
+        [EnableQuery]
+        public SingleResult<user> Getuser([FromODataUri] int key)
         {
-
-            user usr = new user();
-            usr = db.users.Find(id);
-            if (usr == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(usr);
+            return SingleResult.Create(db.users.Where(user => user.user_id == key));
         }
 
-        // PUT: api/users/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putuser(int id, user user)
+        // PUT: odata/users(5)
+        public IHttpActionResult Put([FromODataUri] int key, Delta<user> patch)
         {
+            Validate(patch.GetEntity());
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.user_id)
+            user user = db.users.Find(key);
+            if (user == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            patch.Put(user);
 
             try
             {
@@ -59,7 +69,7 @@ namespace CharaSparksvc.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!userExists(id))
+                if (!userExists(key))
                 {
                     return NotFound();
                 }
@@ -69,12 +79,11 @@ namespace CharaSparksvc.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Updated(user);
         }
 
-        // POST: api/users
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Postuser(user user)
+        // POST: odata/users
+        public IHttpActionResult Post(user user)
         {
             if (!ModelState.IsValid)
             {
@@ -84,14 +93,51 @@ namespace CharaSparksvc.Controllers
             db.users.Add(user);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = user.user_id }, user);
+            return Created(user);
         }
 
-        // DELETE: api/users/5
-        [ResponseType(typeof(user))]
-        public IHttpActionResult Deleteuser(int id)
+        // PATCH: odata/users(5)
+        [AcceptVerbs("PATCH", "MERGE")]
+        public IHttpActionResult Patch([FromODataUri] int key, Delta<user> patch)
         {
-            user user = db.users.Find(id);
+            Validate(patch.GetEntity());
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            user user = db.users.Find(key);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            patch.Patch(user);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!userExists(key))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Updated(user);
+        }
+
+        // DELETE: odata/users(5)
+        public IHttpActionResult Delete([FromODataUri] int key)
+        {
+            user user = db.users.Find(key);
             if (user == null)
             {
                 return NotFound();
@@ -100,7 +146,28 @@ namespace CharaSparksvc.Controllers
             db.users.Remove(user);
             db.SaveChanges();
 
-            return Ok(user);
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // GET: odata/users(5)/donations
+        [EnableQuery]
+        public IQueryable<donation> Getdonations([FromODataUri] int key)
+        {
+            return db.users.Where(m => m.user_id == key).SelectMany(m => m.donations);
+        }
+
+        // GET: odata/users(5)/user_type
+        [EnableQuery]
+        public SingleResult<user_type> Getuser_type([FromODataUri] int key)
+        {
+            return SingleResult.Create(db.users.Where(m => m.user_id == key).Select(m => m.user_type));
+        }
+
+        // GET: odata/users(5)/wishes
+        [EnableQuery]
+        public IQueryable<wish> Getwishes([FromODataUri] int key)
+        {
+            return db.users.Where(m => m.user_id == key).SelectMany(m => m.wishes);
         }
 
         protected override void Dispose(bool disposing)
@@ -112,9 +179,9 @@ namespace CharaSparksvc.Controllers
             base.Dispose(disposing);
         }
 
-        private bool userExists(int id)
+        private bool userExists(int key)
         {
-            return db.users.Count(e => e.user_id == id) > 0;
+            return db.users.Count(e => e.user_id == key) > 0;
         }
     }
 }

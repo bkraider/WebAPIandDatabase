@@ -23,8 +23,15 @@ namespace CharaSparksvc.Models
         public bool is_active { get; set; }
         public Nullable<System.DateTime> start_date { get; set; }
         public Nullable<System.DateTime> end_date { get; set; }
-        public Nullable<int> user_id { get; set; }
+        public int user_id { get; set; }
+        public Nullable<int> fullfiller_user_id { get; set; }
+        public string gps_coordinates { get; set; }
+        public Nullable<decimal> donation_amount { get; set; }
+        public string charity_name { get; set; }
+        public string charity_email { get; set; }
+        public int donation_status_id { get; set; }
     
+        public virtual donation_status donation_status { get; set; }
         public virtual user user { get; set; }
         public virtual wish_status wish_status { get; set; }
     }
